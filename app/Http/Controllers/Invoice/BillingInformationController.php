@@ -4,28 +4,63 @@ namespace App\Http\Controllers\Invoice;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoice\StoreBillingInformationRequest;
+use App\Http\Requests\Invoice\UpdateBillingInformationRequest;
+use App\Models\BillingInformation;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class BillingInformationController extends Controller
 {
     use HttpResponses;
 
-    public function saveBillingInformation(StoreBillingInformationRequest $request)
+    public function store(StoreBillingInformationRequest $request)
     {
-        $request->updateOrStoreBillingInformation();
-        return $this->success(null, 'Billing information saved successfully');
+        $info = $request->createBillingInfo();
+        return $this->success($info, 'Billing information saved successfully');
+    }
+
+    public function update(BillingInformation $info, UpdateBillingInformationRequest $request)
+    {
+        Gate::authorize('update', $info);
+
+        $info = $request->updateInfo();
+        return $this->success($info, 'Billing information saved successfully');
     }
 
 
-    public function view(Request $request)
+    public function viewAll(Request $request)
     {
-        $billingInformation = $request
+        $infos = $request
             ->user()
-            ->billingInformation
-            ?->only(['first_name', 'last_name', 'company_name', 'apartment', 'city', 'phone', 'email']);
+            ->billingInformations()
+            ->select([
+                'id',
+                'first_name',
+                'last_name',
+                'company_name',
+                'apartment',
+                'city',
+                'phone',
+                'email',
+                'user_id',
+                'is_default'
+            ]);
 
-        return $this->success($billingInformation);
+        return $this->success($infos);
+    }
+
+    public function view(BillingInformation $info, Request $request)
+    {
+        Gate::authorize('view', $info);
+    }
+
+    public function destroy(BillingInformation $info, Request $request)
+    {
+        Gate::authorize('delete', $info);
+
+        $info->delete();
+        return $this->success(null, 'Billing information deleted successfully');
     }
 
 }

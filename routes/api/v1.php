@@ -80,6 +80,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
         });
 
         Route::prefix('checkout')->group(function () {
+            Route::get('/summary', 'Products\CheckoutController@getCheckoutSummary');
             Route::get('/', 'Products\CheckoutController@view');
             Route::get('/billing', 'Products\CheckoutController@billing');
             Route::post('/', 'Products\CheckoutController@checkout');
@@ -100,8 +101,23 @@ Route::namespace('App\Http\Controllers')->group(function () {
         });
 
         Route::prefix('billing-information')->group(function () {
-            Route::get('/', 'Invoice\BillingInformationController@view');
+            Route::get('/', 'Invoice\BillingInformationController@viewAll');
+            Route::get('/{info}', 'Invoice\BillingInformationController@view');
+            Route::delete('/{info}', 'Invoice\BillingInformationController@destroy');
+            Route::post('/', 'Invoice\BillingInformationController@store');
+            Route::patch('/{info}', 'Invoice\BillingInformationController@update');
         });
+
+        Route::prefix('communication-preferences')->group(function () {
+            Route::get('/', 'Communication\CommunicationPreferenceController@viewAll');
+            Route::put('/', 'Communication\CommunicationPreferenceController@save');
+        });
+
+        Route::prefix('notifications')->group(function () {
+            Route::get('/', 'Notification\NotificationsController@viewAll');
+            Route::patch('/{notification}', 'Notification\NotificationsController@markAsRead');
+        });
+
 
         Route::prefix('reviews')->group(function () {
             Route::post('/', 'Reviews\ReviewsController@store');

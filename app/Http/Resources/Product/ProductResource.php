@@ -30,7 +30,6 @@ class ProductResource extends JsonResource
             'featured_image' => $this->getFilePath($this->featured_image),
             'additional_images' => $additionalImages,
             'name' => $this->name,
-            'featured_image' => $this->getFilePath($this->featured_image),
             'is_new' => $this->created_at->diffInDays() < 7,
             'price' => currency_format($this->price),
             'discounted_price_formatted' => (float)$this->discounted_price ? currency_format($this->discounted_price) : null,
@@ -43,7 +42,7 @@ class ProductResource extends JsonResource
             ],
             'sizes' => explode(',', $this->sizes),
             'colors' => json_decode($this->colors),
-            'additional_information' => $this->additional_information,
+            'shipping_details' => $this->shipping_details,
             'available_units' => $this->available_units
         ];
     }

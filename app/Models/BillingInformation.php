@@ -17,7 +17,10 @@ class BillingInformation extends Model
         'city',
         'phone',
         'email',
-        'user_id'
+        'user_id',
+        'is_default',
+        'country',
+        'state',
     ];
 
     public function user()

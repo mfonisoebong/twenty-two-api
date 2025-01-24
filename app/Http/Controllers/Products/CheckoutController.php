@@ -61,4 +61,14 @@ class CheckoutController extends Controller
             return $this->failed(null, StatusCode::InternalServerError->value, 'An error occurred while processing your request');
         }
     }
+
+    public function getCheckoutSummary(Request $request)
+    {
+        $cartItems = $request->user()->cartItems;
+        $coupon = Coupon::where('code', '=', $request->coupon_code)
+            ->first();
+        $summary = $this->getOrderSummary($cartItems, $coupon);
+
+        return $this->success($summary, 'Checkout summary retrieved successfully');
+    }
 }

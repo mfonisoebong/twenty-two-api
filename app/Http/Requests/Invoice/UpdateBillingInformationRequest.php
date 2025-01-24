@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Invoice;
 
+use App\Models\BillingInformation;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBillingInformationRequest extends FormRequest
+class UpdateBillingInformationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -35,14 +36,16 @@ class StoreBillingInformationRequest extends FormRequest
         ];
     }
 
-    public function createBillingInfo()
+    public function updateInfo()
     {
         $user = $this->user();
+        $info = $this->route('info');
 
         if ($this->is_default) {
             $user->billingInformations()->update(['is_default' => false]);
         }
-        $info = $user->billingInformation()->create($this->validated());
+
+        $info->update($this->validated());
 
         return $info;
     }

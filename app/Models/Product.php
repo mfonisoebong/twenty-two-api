@@ -17,19 +17,21 @@ class Product extends Model
         'base_price',
         'discounted_price',
         'description',
-        'additional_information',
+        'shipping_details',
         'colors',
         'sizes',
         'available_units',
         'category_id',
-        'colors_list'
+        'colors_list',
+        'units_sold'
     ];
 
     public function scopeFilter(Builder $builder)
     {
 
         $builder->when(request('search'), function ($builder) {
-            $builder->where('name', 'like', '%' . request('search') . '%');
+            $builder->where('name', 'like', '%' . request('search') . '%')
+                ->orWhere('description', 'like', '%' . request('search') . '%');
         });
         $builder->when(request('size'), function ($builder) {
             $builder->where('sizes', 'like', '%' . request('size') . '%');
@@ -37,11 +39,35 @@ class Product extends Model
         $builder->when(request('color'), function ($builder) {
             $builder->where('colors_list', 'like', '%' . request('color') . '%');
         });
+        $builder->when(request('price_start'), function ($builder) {
+            $builder->where('base_price', '>=', request('price_start'))
+                ->orWhere('discounted_price', '>=', request('price_start'));
+        });
+
+        $builder->when(request('price_end'), function ($builder) {
+            $builder->where('base_price', '<=', request('price_end'))
+                ->orWhere('discounted_price', '<=', request('price_end'));
+        });
+
+        $builder->when(request('sort_by'), function ($builder) {
+            if (request('sort_by') === 'newest') {
+                $builder->latest();
+            }
+            if (request('sort_by') === 'best_selling') {
+                $builder->orderBy('units_sold', 'desc');
+            }
+
+        });
     }
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function invoiceItems()
+    {
+        return $this->hasMany(InvoiceItem::class);
     }
 
     public function getPriceAttribute()
@@ -59,15 +85,15 @@ class Product extends Model
     public function getInWishlistAttribute()
     {
         return auth()->check() && WishlistItem::where('product_id', $this->id)
-            ->where('user_id', auth()->id())
-            ->exists();
+                ->where('user_id', auth()->id())
+                ->exists();
     }
 
     public function getInCartAttribute()
     {
         return auth()->check() && CartItem::where('product_id', $this->id)
-            ->where('user_id', auth()->id())
-            ->exists();
+                ->where('user_id', auth()->id())
+                ->exists();
     }
 
     public function getCartItemAttribute()

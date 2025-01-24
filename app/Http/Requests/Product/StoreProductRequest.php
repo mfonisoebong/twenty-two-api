@@ -33,7 +33,7 @@ class StoreProductRequest extends FormRequest
             'base_price' => ['required', 'numeric', 'min:0'],
             'discounted_price' => ['nullable', 'numeric', 'min:0'],
             'description' => ['required', 'string', 'max:5000'],
-            'additional_information' => ['nullable', 'string', 'max:5000'],
+            'shipping_details' => ['nullable', 'string', 'max:5000'],
             'colors' => ['required', 'array'],
             'colors.*.name' => ['string', 'max:255'],
             'colors.*.color' => ['string', 'max:255'],

@@ -26,7 +26,8 @@ class User extends Authenticatable
         'password',
         'role',
         'avatar',
-        'status'
+        'status',
+        'communication_preference'
     ];
 
     /**
@@ -90,8 +91,13 @@ class User extends Authenticatable
         return $this->hasMany(CartItem::class);
     }
 
-    public function billingInformation()
+    public function billingInformations()
     {
-        return $this->hasOne(BillingInformation::class);
+        return $this->hasMany(BillingInformation::class);
+    }
+
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable')->orderBy('created_at', 'desc');
     }
 }

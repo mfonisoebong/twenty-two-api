@@ -28,7 +28,7 @@ class ProductFactory extends Factory
                 'products/item-2.png',
                 'products/item-3.png',
             ]),
-            'additional_information' => fake()->paragraph(),
+            'shipping_details' => fake()->paragraph(),
             'base_price' => $basePrice,
             'discounted_price' => $discountedPrice,
             'colors' => json_encode(fake()->randomElements([

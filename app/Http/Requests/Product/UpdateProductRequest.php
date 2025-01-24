@@ -33,7 +33,7 @@ class UpdateProductRequest extends FormRequest
             'base_price' => ['required', 'numeric', 'min:0'],
             'discounted_price' => ['nullable', 'numeric', 'min:0'],
             'description' => ['required', 'string'],
-            'additional_information' => ['required', 'string'],
+            'shipping_details' => ['required', 'string'],
             'colors' => ['required', 'array'],
             'colors.*.name' => ['string', 'max:255'],
             'colors.*.color' => ['string', 'max:255'],
@@ -46,8 +46,6 @@ class UpdateProductRequest extends FormRequest
 
     public function updateProduct()
     {
-
-
         $product = $this->route('product');
         $featuredImage = $this->file('featured_image') ?
             $this->uploadFile($this->file('featured_image'), 'products') :

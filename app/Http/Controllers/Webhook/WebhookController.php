@@ -46,6 +46,7 @@ class WebhookController extends Controller
 
         $invoice->items->each(function ($item) {
             $item->product->decrement('available_units', $item->quantity);
+            $item->product->increment('units_sold', $item->quantity);
         });
 
 
@@ -62,26 +63,25 @@ class WebhookController extends Controller
             $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
             $event = null;
 
-        try {
-            $event = \Stripe\Webhook::constructEvent(
-                $payload, $sig_header, config('services.stripe.webhook_secret')
-            );
-        } catch (\UnexpectedValueException $e) {
-            return response()->json(['message' => 'Invalid payload'], 400);
-        } catch (\Stripe\Exception\SignatureVerificationException $e) {
-            return response()->json(['message' => 'Invalid signature'], 400);
-        }
+            try {
+                $event = \Stripe\Webhook::constructEvent(
+                    $payload, $sig_header, config('services.stripe.webhook_secret')
+                );
+            } catch (\UnexpectedValueException $e) {
+                return response()->json(['message' => 'Invalid payload'], 400);
+            } catch (\Stripe\Exception\SignatureVerificationException $e) {
+                return response()->json(['message' => 'Invalid signature'], 400);
+            }
 
-        if (!in_array($event->type, Invoice::EVENTS)) {
-            return response()->json(['message' => 'Invalid event'], 400);
-        }
+            if (!in_array($event->type, Invoice::EVENTS)) {
+                return response()->json(['message' => 'Invalid event'], 400);
+            }
 
             $data = $event->data->object;
             $reference = $data['metadata']['reference'];
 
             $invoice = Invoice::where('trx_id', $reference)->first();
             $amount = (float)($data['amount_total'] / 100);
-
 
 
             if (!$invoice) {
@@ -105,8 +105,8 @@ class WebhookController extends Controller
 
             return response(null, StatusCode::Success->value);
 
-        } catch (Exception $e){
-            return  response()->json(['message' => $e->getMessage()], 400);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
         }
 
 
