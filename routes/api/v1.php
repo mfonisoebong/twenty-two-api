@@ -116,6 +116,9 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::prefix('notifications')->group(function () {
             Route::get('/', 'Notification\NotificationsController@viewAll');
             Route::patch('/{notification}', 'Notification\NotificationsController@markAsRead');
+            Route::middleware('role:admin')->group(function () {
+                Route::post('/', 'Notification\NotificationsController@sendNotifications');
+            });
         });
 
 

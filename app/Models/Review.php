@@ -12,18 +12,14 @@ class Review extends Model
     protected $fillable = [
         'product_id',
         'user_id',
-        'headline',
         'nickname',
         'location',
-        'width',
-        'fit_report',
-        'comfort',
-        'durability',
         'bottom_line',
         'image',
         'video',
         'rating',
         'review',
+        'email'
     ];
 
     public function product()
@@ -35,6 +31,4 @@ class Review extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
 }

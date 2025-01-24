@@ -14,13 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('headline');
             $table->string('nickname');
             $table->string('location');
-            $table->enum('width', ['narrow', 'fitted', 'wide']);
-            $table->enum('fit_report', ['small', 'fitted', 'large']);
-            $table->enum('comfort', ['uncomfortable', 'comfortable', 'very_comfortable']);
-            $table->enum('durability', ['not_durable', 'durable', 'very_durable']);
+            $table->string('email');
             $table->enum('bottom_line', ['recommend', 'not_recommend', 'highly_recommend']);
             $table->string('image')
                 ->nullable()

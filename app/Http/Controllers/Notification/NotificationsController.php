@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Notification;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Notification\SendNotificationRequest;
 use App\Http\Resources\Notification\NotificationResource;
 use App\Models\Notification;
+use App\Models\User;
+use App\Notifications\Admin\AdminNotification;
 use App\Traits\HttpResponses;
 use App\Traits\Pagination;
 use Illuminate\Http\Request;
@@ -31,5 +34,11 @@ class NotificationsController extends Controller
         $data = $this->paginatedData($notifications, $list);
 
         return $this->success($data);
+    }
+
+    public function sendNotifications(SendNotificationRequest $request)
+    {
+        $request->sendNotifications();
+        return $this->success(null, 'Notifications sent successfully');
     }
 }
