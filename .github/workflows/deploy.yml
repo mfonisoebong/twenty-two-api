@@ -17,18 +17,18 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          port: 22
+          port: 21098
           script: |
-            cd api.dexwearsglobal.com
+            cd api.ttavenue.com
 
             # Stash changes
             git stash
 
             # Pull the latest code
-            git pull origin main               
+            git pull origin master
 
             # Install dependencies
-            composer install              
+            composer install
             composer dump-autoload
 
             php artisan migrate --force
