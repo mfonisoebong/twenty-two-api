@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'email' => config('app.admin_email'),
             'role' => 'admin',
             'email_verified_at' => now(),
-            'password' => Hash::make('Dexluxury$2020'),
+            'password' => Hash::make('TTAvenue$2020'),
             'remember_token' => Str::random(10),
         ]);
     }
