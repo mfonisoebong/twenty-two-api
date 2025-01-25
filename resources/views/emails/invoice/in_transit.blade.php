@@ -6,7 +6,7 @@
             Hi {{$invoice->user->name}},
         </p>
         <p>
-            Great news! Your Dex order # {{$invoice->id}} has shipped and is now on its way to you.
+            Great news! Your {{config('app.name')}} order # {{$invoice->id}} has shipped and is now on its way to you.
         </p>
         <p>
             Estimated Delivery:
@@ -20,7 +20,7 @@
         <p>Questions?</p>
         <p>
             If you have any questions about your order or its delivery, please don't hesitate to contact our customer
-            support team at <a href="mailto:support@dexwearsglobal.com">support@dexwearsglobal.com</a>.
+            support team at <a href="mailto:support@ttavenue.com">support@ttavenue.com</a>.
         </p>
         <p>
             We're here to help! <br>

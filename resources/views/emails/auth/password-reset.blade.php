@@ -13,7 +13,7 @@
         <p>
             Keep your new password secure and avoid sharing it with anyone. <br>
             Consider using a strong password that combines uppercase and lowercase letters, numbers, and symbols. <br>
-            We're happy to have you back in the Dex crew!
+            We're happy to have you back in the {{config('app.name')}} crew!
         </p>
 
 

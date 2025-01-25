@@ -6,7 +6,8 @@
         <h3 style="text-align: center">Email verified successfly</h3>
 
         <p>
-            Your email has been successfully verified. You can now access your Dex account and explore all
+            Your email has been successfully verified. You can now access your {{config('app.name')}} account and
+            explore all
             the
             features we offer.
         </p>

@@ -36,25 +36,25 @@ class InvoiceAction extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $subject = "";
-
+        $appName = config('app.name');
         if ($this->invoice->status === 'pending') {
-            $subject = "Your Dex Cart Awaits!";
+            $subject = "Your $appName Cart Awaits!";
         }
 
         if ($this->invoice->status === 'paid') {
-            $subject = "Your Dex Order Confirmation (# {$this->invoice->id})";
+            $subject = "Your $appName Order Confirmation (# {$this->invoice->id})";
         }
 
         if ($this->invoice->status === 'in_transit') {
-            $subject = "Your Dex Order (# {$this->invoice->id})  is on its way!";
+            $subject = "Your $appName Order (# {$this->invoice->id})  is on its way!";
         }
 
         if ($this->invoice->status === 'delivered') {
-            $subject = "Your Dex Order (# {$this->invoice->id}) has been delivered!";
+            $subject = "Your $appName Order (# {$this->invoice->id}) has been delivered!";
         }
 
         if ($this->invoice->status === 'cancelled') {
-            $subject = "Your Dex Order (# {$this->invoice->id}) has been cancelled";
+            $subject = "Your $appName Order (# {$this->invoice->id}) has been cancelled";
         }
 
 

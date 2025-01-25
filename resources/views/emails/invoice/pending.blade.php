@@ -35,7 +35,7 @@
     <div>
         <p>Hi {{$invoice->user->name}},</p>
         <p>
-            This is a friendly reminder that you have items waiting for you in your Dex cart!
+            This is a friendly reminder that you have items waiting for you in your {{config('app.name')}} cart!
         </p>
         <p>
             We've saved the following items for you:

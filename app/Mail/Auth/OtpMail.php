@@ -28,8 +28,8 @@ class OtpMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         $subject = $this->otp->type === 'email' ?
-            'Verify Your Dex Email to Unlock Awesome Perks!' :
-            'Reset Your Dex Password';
+            'Verify Your Email to Unlock Awesome Perks!' :
+            'Reset Password';
         return new Envelope(
             subject: $subject,
         );

@@ -64,7 +64,7 @@
         <p>In the meantime, you can:
             <br>
 
-            View your order details by logging into your Dex account.
+            View your order details by logging into your {{config('app.name')}} account.
             Track your order's progress once it ships (tracking information will be emailed to you).
         </p>
     </div>
@@ -73,7 +73,7 @@
         <p>Need Help?</p>
         <p>
             If you have any questions about your order, please don't hesitate to contact our customer support team at
-            <a href="mailto:support@dexwearsglobal.com">support@dexwearsglobal.com</a>.
+            <a href="mailto:support@ttavenue.com">support@ttavenue.com</a>.
         </p>
         <p>
             We appreciate your business and look forward to getting your order to you soon!

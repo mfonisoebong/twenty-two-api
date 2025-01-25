@@ -7,7 +7,7 @@
         <div>
             <p>Hi {{$otp->user->full_name}},</p>
             <p>
-                Thank you for signing up with Dex! To complete your account creation, please click on the
+                Thank you for signing up with {{config('app.name')}}! To complete your account creation, please click on the
                 link below to verify your email address:
             </p>
             <p>
@@ -20,7 +20,7 @@
                 <b>Important</b>: For security reasons, please do not share this OTP with anyone.
             </p>
             <p>
-                Once you've entered the OTP, you'll be able to access your Dex account and explore all the
+                Once you've entered the OTP, you'll be able to access your {{config('app.name')}} account and explore all the
                 features we offer.
             </p>
         </div>
