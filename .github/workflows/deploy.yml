@@ -1,9 +1,9 @@
-name: Dexluxury API Deploy
+name: Twenty Two Avenue API Deploy
 
 on:
   push:
     branches:
-      - main # Deploy when pushing to the master branch
+      - master # Deploy when pushing to the master branch
 
 jobs:
   deploy:
