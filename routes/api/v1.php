@@ -58,7 +58,8 @@ Route::namespace('App\Http\Controllers')->group(function () {
             Route::delete('/{product}', 'Products\ProductsController@destroy');
             Route::post('/{product}/update', 'Products\ProductsController@update');
         });
-
+        Route::get('/latest', 'Products\ProductsController@viewLatest');
+        Route::get('/low-cost', 'Products\ProductsController@viewLowCost');
         Route::get('/{product}', 'Products\ProductsController@show');
         Route::get('/{product}/related', 'Products\ProductsController@relatedProducts');
         Route::get('/{product}/reviews', 'Products\ProductsController@reviews');
@@ -172,7 +173,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
     });
 
     Route::prefix('newsletter')->group(function () {
-        Route::post('/subscribe', 'Newsletter\NewsletterSubscriptionController@store');
+        Route::post('/subscribe', 'Newsletter\NewsletterSubscribersController@store');
     });
 
     Route::get('/hero-details', 'Home\HomeController@viewAll');

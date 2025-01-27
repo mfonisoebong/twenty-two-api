@@ -30,9 +30,10 @@ class CategoriesController extends Controller
         return $this->success($data);
     }
 
+
     public function viewAll()
     {
-        $categories = Category::all();
+        $categories = Category::filter()->get();
 
         $list = CategoryResource::collection($categories);
 

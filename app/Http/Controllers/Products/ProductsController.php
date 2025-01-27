@@ -33,6 +33,23 @@ class ProductsController extends Controller
         return $this->success($data);
     }
 
+    public function viewLatest()
+    {
+        $products = Product::latest()->limit(12)->get();
+
+        $productsList = ProductListItemResource::collection($products);
+
+        return $this->success($productsList);
+    }
+
+    public function viewLowCost()
+    {
+        $products = Product::where('base_price', '<=', 20_000)->limit(12)->get();
+
+        $productsList = ProductListItemResource::collection($products);
+
+        return $this->success($productsList);
+    }
 
     public function show(Product $product)
     {

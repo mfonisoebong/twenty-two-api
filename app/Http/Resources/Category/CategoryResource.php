@@ -23,6 +23,7 @@ class CategoryResource extends JsonResource
             'slug' => $this->slug,
             'featured_image' => $this->getFilePath($this->featured_image),
             'is_featured' => (bool)$this->is_featured,
+            'description' => $this->description,
         ];
     }
 }
