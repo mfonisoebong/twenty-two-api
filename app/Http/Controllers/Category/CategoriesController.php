@@ -48,8 +48,10 @@ class CategoriesController extends Controller
         return $this->success($list);
     }
 
-    public function view(Category $category)
+    public function view(string $slug)
     {
+        $category = Category::where('slug', $slug)->firstOrFail();
+
         return $this->success(new CategoryResource($category));
     }
 

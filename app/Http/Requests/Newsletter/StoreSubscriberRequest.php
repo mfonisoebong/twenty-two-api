@@ -24,7 +24,6 @@ class StoreSubscriberRequest extends FormRequest
         return [
             'email' => ['email', 'unique:newsletter_subscribers,email', 'required_if:phone,null'],
             'phone' => ['string', 'max:255', 'required_if:email,null'],
-            // Required if phone exists
             'dial_code' => ['string', 'max:255', 'required_with:phone'],
         ];
     }

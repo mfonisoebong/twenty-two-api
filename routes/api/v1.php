@@ -40,7 +40,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', 'Category\CategoriesController@viewAll');
         Route::get('/featured', 'Category\CategoriesController@viewFeatured');
-        Route::get('/{category}', 'Category\CategoriesController@view');
+        Route::get('/{slug}', 'Category\CategoriesController@view');
         Route::middleware(['auth:sanctum', 'verified', 'role:admin'])->group(function () {
             Route::post('/', 'Category\CategoriesController@store');
             Route::post('/{category}/update', 'Category\CategoriesController@update');
