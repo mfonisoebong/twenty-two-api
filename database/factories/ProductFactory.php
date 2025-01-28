@@ -22,11 +22,15 @@ class ProductFactory extends Factory
         $discountedPrice = fake()->numberBetween(2, $basePrice);
         return [
             'name' => fake()->word(),
-            'featured_image' => fake()->randomElement(['products/item-1.png', 'products/item-2.png', 'products/item-3.png']),
+            'featured_image' => fake()->randomElement([
+                'products/tshirt.jpeg',
+                'products/sweatshirt.jpeg',
+                'products/hoodie.jpeg',
+            ]),
             'additional_images' => implode(',', [
-                'products/item-1.png',
-                'products/item-2.png',
-                'products/item-3.png',
+                'products/tshirt.jpeg',
+                'products/sweatshirt.jpeg',
+                'products/hoodie.jpeg',
             ]),
             'shipping_details' => fake()->paragraph(),
             'base_price' => $basePrice,
