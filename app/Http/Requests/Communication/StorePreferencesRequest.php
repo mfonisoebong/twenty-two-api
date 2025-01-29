@@ -22,7 +22,7 @@ class StorePreferencesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'preferences' => ['required', 'array'],
+            'preferences' => ['array'],
             'preferences.*' => ['string', 'in:all,sales,new_arrivals,special_edition,discounts,collection'],
         ];
     }

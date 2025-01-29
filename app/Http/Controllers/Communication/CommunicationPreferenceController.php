@@ -15,6 +15,7 @@ class CommunicationPreferenceController extends Controller
     {
         $user = $request->user();
         $preferences = explode(',', $user->communication_preference);
+        $preferences = $preferences[0] === '' ? [] : $preferences;
 
         return $this->success($preferences);
     }

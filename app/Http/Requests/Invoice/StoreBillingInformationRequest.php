@@ -40,9 +40,11 @@ class StoreBillingInformationRequest extends FormRequest
         $user = $this->user();
 
         if ($this->is_default) {
-            $user->billingInformations()->update(['is_default' => false]);
+            $user->billingInformations()
+                ->where('is_default', true)
+                ->update(['is_default' => false]);
         }
-        $info = $user->billingInformation()->create($this->validated());
+        $info = $user->billingInformations()->create($this->validated());
 
         return $info;
     }

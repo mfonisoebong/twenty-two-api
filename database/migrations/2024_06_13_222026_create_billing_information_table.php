@@ -22,8 +22,7 @@ return new class extends Migration {
             $table->string('phone');
             $table->string('email')
                 ->unique();
-            $table->unsignedBigInteger('user_id')
-                ->unique();
+            $table->unsignedBigInteger('user_id');
 
             $table->foreign('user_id')
                 ->references('id')

@@ -49,8 +49,8 @@ class CheckoutController extends Controller
 
             DB::commit();
 
-//            $user->notify(new InvoiceAction($invoice));
-//            Mail::to(config('app.admin_email'))->send(new AdminNotificationMail($invoice));
+            $user->notify(new InvoiceAction($invoice));
+            Mail::to(config('app.admin_email'))->send(new AdminNotificationMail($invoice));
 
             return $this->success([
                 'payment_url' => $paymentUrl,
