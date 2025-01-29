@@ -81,16 +81,12 @@ Route::namespace('App\Http\Controllers')->group(function () {
         });
 
         Route::prefix('checkout')->group(function () {
-            Route::get('/summary', 'Products\CheckoutController@getCheckoutS    ummary');
+            Route::get('/summary', 'Products\CheckoutController@getCheckoutSummary');
             Route::get('/', 'Products\CheckoutController@view');
             Route::get('/billing', 'Products\CheckoutController@billing');
             Route::post('/', 'Products\CheckoutController@checkout');
         });
 
-        Route::prefix('billing-information')->group(function () {
-            Route::put('/', 'Invoice\BillingInformationController@saveBillingInformation');
-            Route::get('/', 'Invoice\BillingInformationController@view');
-        });
 
         Route::prefix('orders')->group(function () {
             Route::get('/', 'Invoice\OrderController@viewOrders');
@@ -103,6 +99,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
         Route::prefix('billing-information')->group(function () {
             Route::get('/', 'Invoice\BillingInformationController@viewAll');
+            Route::get('/default', 'Invoice\BillingInformationController@viewDefault');
             Route::get('/{info}', 'Invoice\BillingInformationController@view');
             Route::delete('/{info}', 'Invoice\BillingInformationController@destroy');
             Route::post('/', 'Invoice\BillingInformationController@store');

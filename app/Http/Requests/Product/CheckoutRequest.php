@@ -37,7 +37,7 @@ class CheckoutRequest extends FormRequest
             'company_name' => ['nullable', 'string'],
             'apartment' => ['required', 'string'],
             'city' => ['required', 'string'],
-             'country' => ['required', 'string'],
+            'country' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email'],
             'save_billing' => ['required', 'boolean'],
@@ -51,6 +51,10 @@ class CheckoutRequest extends FormRequest
         $items = auth()->user()->cartItems;
 
         $validProducts = [];
+
+        if (empty($items)) {
+            throw new Exception('You have no items in your cart');
+        }
 
         foreach ($items as $item) {
 
@@ -86,7 +90,7 @@ class CheckoutRequest extends FormRequest
         $user = $this->user();
         $billingInformation = $this->except('save_billing', 'coupon_code');
         // Create or update
-        $user->billingInformation()->updateOrCreate([], $billingInformation);
+        $user->billingInformations()->create($billingInformation);
     }
 
     public function calculatePrice(array $products)

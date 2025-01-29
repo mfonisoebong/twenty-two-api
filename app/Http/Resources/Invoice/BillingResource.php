@@ -19,6 +19,8 @@ class BillingResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'company_name' => $this->company_name,
+            'country' => $this->country,
+            'state' => $this->state,
             'apartment' => $this->apartment,
             'city' => $this->city,
             'phone' => $this->phone,

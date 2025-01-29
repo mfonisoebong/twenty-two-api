@@ -29,6 +29,20 @@ class BillingInformationController extends Controller
         return $this->success($info, 'Billing information saved successfully');
     }
 
+    public function viewDefault(Request $request)
+    {
+        $info = $request
+            ->user()
+            ->billingInformations()
+            ->where('is_default', true)
+            ->exists() ?
+            $request->user()->billingInformations()->where('is_default', true)->first() :
+            $request->user()->billingInformations()->first();
+
+        $data = $info ? new BillingResource($info) : null;
+
+        return $this->success($data);
+    }
 
     public function viewAll(Request $request)
     {
