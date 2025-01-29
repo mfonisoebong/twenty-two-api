@@ -40,13 +40,11 @@ class Product extends Model
             $builder->where('colors_list', 'like', '%' . request('color') . '%');
         });
         $builder->when(request('price_start'), function ($builder) {
-            $builder->where('base_price', '>=', request('price_start'))
-                ->orWhere('discounted_price', '>=', request('price_start'));
+            $builder->where('base_price', '>=', request('price_start'));
         });
 
         $builder->when(request('price_end'), function ($builder) {
-            $builder->where('base_price', '<=', request('price_end'))
-                ->orWhere('discounted_price', '<=', request('price_end'));
+            $builder->where('base_price', '<=', request('price_end'));
         });
 
         $builder->when(request('sort_by'), function ($builder) {
@@ -56,7 +54,6 @@ class Product extends Model
             if (request('sort_by') === 'best_selling') {
                 $builder->orderBy('units_sold', 'desc');
             }
-
         });
     }
 
@@ -85,15 +82,15 @@ class Product extends Model
     public function getInWishlistAttribute()
     {
         return auth()->check() && WishlistItem::where('product_id', $this->id)
-                ->where('user_id', auth()->id())
-                ->exists();
+            ->where('user_id', auth()->id())
+            ->exists();
     }
 
     public function getInCartAttribute()
     {
         return auth()->check() && CartItem::where('product_id', $this->id)
-                ->where('user_id', auth()->id())
-                ->exists();
+            ->where('user_id', auth()->id())
+            ->exists();
     }
 
     public function getCartItemAttribute()

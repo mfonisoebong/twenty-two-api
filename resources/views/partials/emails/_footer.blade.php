@@ -1,3 +1,3 @@
 <div>
-    <p> {{$role === 'user' ? "The {{config('app.name')}} Team": "The {{config('app.name')}} System"}}</p>
+    <p> {{$role === 'user' ? "The Twenty Two Avenue Team": "The Twenty Two Avenue System"}}</p>
 </div>

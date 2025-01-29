@@ -169,10 +169,13 @@ class AuthController extends Controller
 
     private function sendOtpMail($user, string $type)
     {
-        $otp = $user->otps()->create([
-            'type' => $type,
-        ]);
-        Mail::to($user->email)
-            ->send(new OtpMail($otp));
+        try {
+            $otp = $user->otps()->create([
+                'type' => $type,
+            ]);
+            Mail::to($user->email)
+                ->send(new OtpMail($otp));
+        } catch (Exception $e) {
+        }
     }
 }

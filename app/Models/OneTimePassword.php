@@ -26,7 +26,7 @@ class OneTimePassword extends Model
         parent::boot();
 
         static::creating(function (OneTimePassword $otp) {
-            $code = mt_rand(100000, 999999);
+            $code = mt_rand(100_000, 999_999);
             $otp->code = $code;
         });
     }

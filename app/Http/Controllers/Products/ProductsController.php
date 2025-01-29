@@ -64,7 +64,7 @@ class ProductsController extends Controller
         $products = Product::where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
             ->inRandomOrder()
-            ->limit(20)
+            ->limit(4)
             ->get();
         $productsList = ProductListItemResource::collection($products);
 
@@ -104,7 +104,7 @@ class ProductsController extends Controller
     {
         $reviews = $product->reviews()
             ->latest()
-            ->paginate(12);
+            ->paginate(4);
 
         $reviewsList = ReviewResource::collection($reviews);
 

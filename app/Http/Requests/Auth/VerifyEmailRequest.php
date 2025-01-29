@@ -42,11 +42,9 @@ class VerifyEmailRequest extends FormRequest
         $otp->user->email_verified_at = now();
         $otp->user->save();
 
-        Mail::to($otp->user->email)
-            ->send(new WelcomeMail($otp->user));
+        // Mail::to($otp->user->email)
+        //     ->send(new WelcomeMail($otp->user));
 
         $otp->delete();
     }
-
-
 }
