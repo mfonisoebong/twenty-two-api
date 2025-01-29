@@ -81,7 +81,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
         });
 
         Route::prefix('checkout')->group(function () {
-            Route::get('/summary', 'Products\CheckoutController@getCheckoutSummary');
+            Route::get('/summary', 'Products\CheckoutController@getCheckoutS    ummary');
             Route::get('/', 'Products\CheckoutController@view');
             Route::get('/billing', 'Products\CheckoutController@billing');
             Route::post('/', 'Products\CheckoutController@checkout');

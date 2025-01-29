@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Invoice;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoice\StoreBillingInformationRequest;
 use App\Http\Requests\Invoice\UpdateBillingInformationRequest;
+use App\Http\Resources\Invoice\BillingResource;
 use App\Models\BillingInformation;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
@@ -33,26 +34,18 @@ class BillingInformationController extends Controller
     {
         $infos = $request
             ->user()
-            ->billingInformations()
-            ->select([
-                'id',
-                'first_name',
-                'last_name',
-                'company_name',
-                'apartment',
-                'city',
-                'phone',
-                'email',
-                'user_id',
-                'is_default'
-            ]);
+            ->billingInformations;
 
-        return $this->success($infos);
+        $data = BillingResource::collection($infos);
+
+        return $this->success($data);
     }
 
     public function view(BillingInformation $info, Request $request)
     {
         Gate::authorize('view', $info);
+        $data = new BillingResource($info);
+        return $this->success($data);
     }
 
     public function destroy(BillingInformation $info, Request $request)

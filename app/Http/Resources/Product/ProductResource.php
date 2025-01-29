@@ -9,6 +9,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ProductResource extends JsonResource
 {
     use UploadFiles;
+
     /**
      * Transform the resource into an array.
      *
@@ -19,6 +20,8 @@ class ProductResource extends JsonResource
         $images = explode(',', $this->additional_images);
 
         $additionalImages = !$images[0] ? [] : array_map(fn($image) => $this->getFilePath($image), $images);
+
+
         return [
             'id' => (string)$this->id,
             'category' => [
@@ -43,7 +46,7 @@ class ProductResource extends JsonResource
             'sizes' => explode(',', $this->sizes),
             'colors' => json_decode($this->colors),
             'shipping_details' => $this->shipping_details,
-            'available_units' => $this->available_units
+            'available_units' => $this->available_units,
         ];
     }
 }
