@@ -38,7 +38,8 @@
             Hi {{$invoice->user->name}},
         </p>
         <p>
-            Thank you for your order with Dex! We've received your payment for your order # {{$invoice->id}}
+            Thank you for your order to {{config('app.name')}}! We've received your payment for your order
+            # {{$invoice->id}}
             and it's now being processed.
         </p>
         <p>
