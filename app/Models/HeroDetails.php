@@ -15,5 +15,6 @@ class HeroDetails extends Model
         'image',
         'button_text',
         'button_link',
+        'image_sm'
     ];
 }

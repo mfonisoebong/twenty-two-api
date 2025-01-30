@@ -28,6 +28,7 @@ class UpdateHeroDetailsRequest extends FormRequest
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:3072'],
+            'image_sm' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:3072'],
             'button_text' => ['required', 'string'],
             'button_link' => ['required', 'string'],
         ];
@@ -40,10 +41,14 @@ class UpdateHeroDetailsRequest extends FormRequest
         $image = $this->file('image') ?
             $this->uploadFile($this->file('image'), 'hero_details') :
             $details->image;
+        $imageSm = $this->file('image_sm') ?
+            $this->uploadFile($this->file('image_sm'), 'hero_details') :
+            $details->image_sm;
 
         $data = [
             ...$this->except(['image']),
             'image' => $image,
+            'image_sm' => $imageSm,
         ];
 
         $details->update($data);

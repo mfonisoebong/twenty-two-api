@@ -31,14 +31,17 @@ class StoreHeroDetailsRequest extends FormRequest
             'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:3072'],
             'button_text' => ['required', 'string'],
             'button_link' => ['required', 'string'],
+            'image_sm' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:3072'],
         ];
     }
 
     public function createDetails()
     {
         $image = $this->uploadFile($this->file('image'), 'hero_details');
+        $imageSm = $this->uploadFile($this->file('image_sm'), 'hero_details');
         $data = [
             ...$this->except(['image']),
+            'image_sm' => $imageSm,
             'image' => $image,
         ];
         HeroDetails::create($data);
