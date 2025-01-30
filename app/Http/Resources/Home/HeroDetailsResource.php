@@ -22,6 +22,7 @@ class HeroDetailsResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->getFilePath($this->image),
+            'image_sm' => $this->image_sm ? $this->getFilePath($this->image_sm) : null,
             'button_text' => $this->button_text,
             'button_link' => $this->button_link,
         ];
