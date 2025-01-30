@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -16,12 +17,13 @@ class RoleAuthenticate
     public function handle(Request $request, Closure $next, ...$guards): Response
     {
         $guard = $guards[0];
-        $user  = auth()->user();
+        $user = auth()->user();
 
-        if ( ! $user || $user->role !== $guard) {
+        if (!$user || $user->role !== $guard) {
             return back()
                 ->with('error', 'You do not have access to this resource');
         }
+
         return $next($request);
     }
 }
