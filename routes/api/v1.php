@@ -68,7 +68,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::middleware('auth:sanctum', 'verified')->group(function () {
         Route::prefix('wishlist')->group(function () {
             Route::get('/', 'Products\WishlistController@viewAll');
-            Route::put('/{product}', 'Products\WishlistController@addOrRemoveToWishlist');
+            Route::post('/{product}', 'Products\WishlistController@store');
             Route::delete('/{item}', 'Products\WishlistController@destroy');
         });
 

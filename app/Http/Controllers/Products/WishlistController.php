@@ -15,14 +15,13 @@ class WishlistController extends Controller
     use HttpResponses, Pagination;
 
 
-    public function addOrRemoveToWishlist(Product $product, Request $request)
+    public function store(Product $product, Request $request)
     {
         $user = $request->user();
 
         $exists = $user->wishlistItems()->where('product_id', $product->id)->exists();
 
         if ($exists) {
-            $user->wishlistItems()->where('product_id', $product->id)->delete();
             return $this->success([
                 'count' => $user->wishlistItems()->count()
             ], 'Product added to wishlist successfully');
