@@ -40,7 +40,7 @@ class StoreHeroDetailsRequest extends FormRequest
         $image = $this->uploadFile($this->file('image'), 'hero_details');
         $imageSm = $this->uploadFile($this->file('image_sm'), 'hero_details');
         $data = [
-            ...$this->except(['image']),
+            ...$this->except(['image', 'image_sm']),
             'image_sm' => $imageSm,
             'image' => $image,
         ];

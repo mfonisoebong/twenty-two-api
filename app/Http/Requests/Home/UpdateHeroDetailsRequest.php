@@ -46,7 +46,7 @@ class UpdateHeroDetailsRequest extends FormRequest
             $details->image_sm;
 
         $data = [
-            ...$this->except(['image']),
+            ...$this->except(['image', 'image_sm']),
             'image' => $image,
             'image_sm' => $imageSm,
         ];
