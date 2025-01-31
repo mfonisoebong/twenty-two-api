@@ -20,10 +20,10 @@ class RecentPurchaseResource extends JsonResource
         $amount = $this->unit_price * $this->quantity;
         return [
             'id' => (string)$this->id,
-            'product' => $this->product ? [
+            'product' => $this->name ? [
                 'name' => $this->name,
                 'featured_image' => $this->getFilePath($this->featured_image),
-            ]: null,
+            ] : null,
             'amount' => currency_format($amount),
             'trx_id' => $this->trx_id,
         ];
