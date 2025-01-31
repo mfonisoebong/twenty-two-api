@@ -12,12 +12,13 @@ trait Cart
     {
         $subTotal = $this->calculateSubTotal($cartItems);
         $shippingFee = ShippingFee::first()?->fee ?? 0;
+        $total = ($subTotal + (float)$shippingFee);
         $couponDiscount = $coupon?->value_calculated ?? 0;
 
-        if ($couponDiscount) {
-            $total = ($subTotal - $coupon->calculateDeducted($subTotal)) + (float)$shippingFee;
+        if ($coupon?->type === 'fixed') {
+            $total -= $couponDiscount;
         } else {
-            $total = ($subTotal + (float)$shippingFee);
+            $total -= $subTotal * $couponDiscount;
         }
 
         $orderSummary = [
