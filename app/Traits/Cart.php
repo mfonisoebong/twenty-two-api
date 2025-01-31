@@ -15,8 +15,10 @@ trait Cart
         $total = ($subTotal + (float)$shippingFee);
         $couponDiscount = $coupon?->value_calculated ?? 0;
 
+
+
         if ($couponDiscount) {
-            $total -= $couponDiscount;
+            $total -= $coupon->calculateDeducted($total);
         }
 
         $orderSummary = [
