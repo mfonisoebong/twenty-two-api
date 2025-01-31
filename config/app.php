@@ -187,6 +187,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
-    'admin_email' => env('ADMIN_EMAIL', '')
+    'admin_email' => env('ADMIN_EMAIL', 'admin@ttavenue.com')
 
 ];

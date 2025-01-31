@@ -34,4 +34,23 @@ class NewsletterSubscribersController extends Controller
         return $this->success($data);
     }
 
+    public function exportCsv()
+    {
+        $subscribers = NewsletterSubscriber::all();
+        $filename = 'subscribers.csv';
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, ['Email', 'Phone', 'Created At']);
+
+        foreach ($subscribers as $subscriber) {
+            fputcsv($handle, [$subscriber->email, $subscriber->phone, $subscriber->created_at]);
+        }
+
+        fclose($handle);
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+        ];
+
+        return response()->download($filename, 'subscribers.csv', $headers);
+    }
 }

@@ -172,6 +172,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::prefix('newsletter')->group(function () {
         Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
             Route::get('/', 'Newsletter\NewsletterSubscribersController@viewAll');
+            Route::get('/export', 'Newsletter\NewsletterSubscribersController@exportCsv');
         });
         Route::post('/subscribe', 'Newsletter\NewsletterSubscribersController@store');
     });
