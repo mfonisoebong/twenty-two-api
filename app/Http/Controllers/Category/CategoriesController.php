@@ -50,7 +50,9 @@ class CategoriesController extends Controller
 
     public function view(string $slug)
     {
-        $category = Category::where('slug', $slug)->firstOrFail();
+        $category = Category::where('slug', $slug)
+            ->orWhere('id', $slug)
+            ->firstOrFail();
 
         return $this->success(new CategoryResource($category));
     }
