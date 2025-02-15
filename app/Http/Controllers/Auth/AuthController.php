@@ -164,7 +164,7 @@ class AuthController extends Controller
 
     public function unauthenticated()
     {
-        return $this->failed(null, StatusCode::Unauthorized->value, 'Unauthenticated');
+        return $this->failed(null, StatusCode::Unauthorized->value, 'You are not signed in');
     }
 
     private function sendOtpMail($user, string $type)
