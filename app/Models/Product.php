@@ -69,7 +69,7 @@ class Product extends Model
 
     public function getPriceAttribute()
     {
-        return $this->discounted_price ?? $this->base_price;
+        return !(float)$this->discounted_price ?? $this->base_price;
     }
 
     public function getFormattedPriceAttribute()

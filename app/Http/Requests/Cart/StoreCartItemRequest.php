@@ -37,7 +37,7 @@ class StoreCartItemRequest extends FormRequest
 
         $product = Product::findOrFail($this->product_id);
         $color = json_decode($product->colors)[0];
-        $colorData = json_encode($color);
+        $colorData = $color->name;
 
         if ($user->cartItems()->where('product_id', $this->product_id)->exists()) {
             return;

@@ -148,7 +148,6 @@ class CheckoutRequest extends FormRequest
     {
         $amount = $invoice->amount_paid;
 
-
         $headers = [
             'Authorization' => 'Bearer ' . config('services.paystack.secret_key')
         ];

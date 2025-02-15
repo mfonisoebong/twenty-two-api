@@ -26,7 +26,7 @@ class InvoiceItemResource extends JsonResource
             ]: null,
             'invoice_id' => (string)$this->invoice_id,
             'status' => $this->invoice->status,
-            'created_at' => $this->created_at->format('On Y-m-d'),
+            'created_at' => $this->created_at->format('Y-m-d'),
             'quantity' => $this->quantity,
             'unit_price' => currency_format($this->unit_price),
             'total' => currency_format($this->total),

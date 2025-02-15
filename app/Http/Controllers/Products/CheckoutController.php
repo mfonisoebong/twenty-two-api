@@ -45,12 +45,12 @@ class CheckoutController extends Controller
             $paymentUrl = $request->generatePaymentLink($invoice);
 
 
-            $user->cartItems()->delete();
 
             DB::commit();
 
             $user->notify(new InvoiceAction($invoice));
             Mail::to(config('app.admin_email'))->send(new AdminNotificationMail($invoice));
+            $user->cartItems()->delete();
 
             return $this->success([
                 'payment_url' => $paymentUrl,
