@@ -42,7 +42,9 @@ class CategoriesController extends Controller
 
     public function viewFeatured()
     {
-        $categories = Category::where('is_featured', true)->get();
+        $categories = Category::where('is_featured', true)
+            ->whereNot('featured_image', null)
+            ->get();
         $list = CategoryResource::collection($categories);
 
         return $this->success($list);
