@@ -24,11 +24,11 @@ class ProductResource extends JsonResource
 
         return [
             'id' => (string)$this->id,
-            'category' => [
+            'category' => $this->category ? [
                 'id' => (string)$this->category->id,
                 'name' => $this->category->name,
                 'slug' => $this->category->slug,
-            ],
+            ]: null,
             'description' => $this->description,
             'featured_image' => $this->getFilePath($this->featured_image),
             'additional_images' => $additionalImages,
