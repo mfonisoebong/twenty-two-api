@@ -20,10 +20,10 @@ class CartItemResource extends JsonResource
         return [
             'id' => (string)$this->id,
             'product' => [
-                'id' => (string)$this->product_id,
-                'name' => $this->product->name,
-                'featured_image' => $this->getFilePath($this->product->featured_image),
-                'price' => currency_format($this->product->price),
+                'id' => (string)$this?->product_id,
+                'name' => $this->product?->name,
+                'featured_image' => $this->getFilePath($this->product?->featured_image),
+                'price' => currency_format($this->product?->price ?? 0),
             ],
             'color' => $this->color,
             'size' => $this->size,

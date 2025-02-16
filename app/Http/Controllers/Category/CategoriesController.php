@@ -44,6 +44,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::where('is_featured', true)
             ->whereNot('featured_image', null)
+            ->latest()
             ->get();
         $list = CategoryResource::collection($categories);
 
