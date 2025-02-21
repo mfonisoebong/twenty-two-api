@@ -109,7 +109,10 @@ class ProductsController extends Controller
         $reviewsList = ReviewResource::collection($reviews);
 
         $data = $this->paginatedData($reviews, $reviewsList);
-        return $this->success($data);
+        return $this->success([
+            'paginated' => $data,
+            'avg_rating' => $product->reviews()->avg('rating')
+        ]);
     }
 
     public function destroy(Product $product)
