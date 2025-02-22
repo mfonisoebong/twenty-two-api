@@ -44,7 +44,9 @@ class ProductsController extends Controller
 
     public function viewLowCost()
     {
-        $products = Product::whereNotNull('discounted_price')->limit(12)->get();
+        $products = Product::whereNotNull('discounted_price')
+            ->where('discounted_price', '>', 0)
+            ->limit(12)->get();
 
         $productsList = ProductListItemResource::collection($products);
 
