@@ -32,7 +32,7 @@ class StoreReviewRequest extends FormRequest
             'nickname' => ['required', 'string', 'max:255'],
             'location' => ['required', 'string', 'max:255'],
             'bottom_line' => ['required', 'in:recommend,not_recommend,highly_recommend'],
-            'image' => ['nullable', 'image', 'max:3072', 'mimes:jpeg,jpg,png'],
+            'image' => ['nullable', 'image', 'max:5120', 'mimes:jpeg,jpg,png'],
             'video' => ['nullable', 'file', 'max:20480', 'mimes:mp4,webm,ogg,flv,mov,avi,wmv'],
         ];
     }
