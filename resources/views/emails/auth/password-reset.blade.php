@@ -1,4 +1,4 @@
-@extends('layouts.user-email')
+@extends('layouts.emails.user')
 
 @section('content')
     <div>
