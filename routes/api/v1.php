@@ -44,9 +44,9 @@ Route::namespace('App\Http\Controllers')->group(function () {
         Route::middleware(['auth:sanctum', 'verified', 'role:admin'])->group(function () {
             Route::post('/', 'Category\CategoriesController@store');
             Route::post('/{category}/update', 'Category\CategoriesController@update');
+            Route::delete('/{category}', 'Category\CategoriesController@destroy');
         });
         Route::get('/{slug}/products', 'Category\CategoriesController@viewProducts');
-        Route::delete('/{category}', 'Category\CategoriesController@destroy');
     });
 
     Route::prefix('products')->group(function () {
